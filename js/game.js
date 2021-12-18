@@ -478,15 +478,15 @@ function initInput()
     keyboard.domElement.addEventListener('keydown', function(event){
         if (keyboard.eventMatches(event, 'a') || keyboard.eventMatches(event, 'left'))
         {
-            wantsRotateL=true;
+            onLeftPress();
         }
         if (keyboard.eventMatches(event, 'd') || keyboard.eventMatches(event, 'right'))
         {
-            wantsRotateR=true;
+            onRightPress();
         }      
         if (keyboard.eventMatches(event, 'space'))
         {
-            thrusting = true;
+            onThrustPress();
         }
         if (keyboard.eventMatches(event, 'down'))
         {
@@ -497,17 +497,15 @@ function initInput()
     keyboard.domElement.addEventListener('keyup', function(event){
         if (keyboard.eventMatches(event, 'a') || keyboard.eventMatches(event, 'left'))
         {
-            wantsRotateL = false;
-            rotatedL = false;
+            onLeftRelease();
         }
         if (keyboard.eventMatches(event, 'd') || keyboard.eventMatches(event, 'right'))
         {
-            wantsRotateR = false;
-            rotatedR = false;
+            onRightRelease();
         }
         if (keyboard.eventMatches(event, 'space'))
         {
-            thrusting = false;
+            onThrustRelease();
         }
     })
 }
@@ -1182,6 +1180,38 @@ function onMouseWheel( event )
         }
         console.log(maxCameraDist);
     }
+}
+
+function onLeftPress()
+{
+    wantsRotateL = true;
+}
+
+function onLeftRelease()
+{
+    wantsRotateL = false;
+    rotatedL = false;
+}
+
+function onRightPress()
+{
+    wantsRotateR = true;
+}
+
+function onRightRelease()
+{
+    wantsRotateR = false;
+    rotatedR = false;
+}
+
+function onThrustPress()
+{
+    thrusting = true;
+}
+
+function onThrustRelease()
+{
+    thrusting = false;
 }
 
 window.onload = () => {
