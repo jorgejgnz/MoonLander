@@ -131,6 +131,7 @@ var bestscore = null;
 var uiScore, uiHighscore;
 var uiFuel;
 var uiControls;
+var uiRotateL, uiRotateR, uiThrust;
 
 // Constructors
 
@@ -226,13 +227,6 @@ function init()
     ar = window.innerWidth / window.innerHeight;
 
     textureLoader = new THREE.TextureLoader();
-    
-    initCameras();
-    initInput();
-    initPhysics();
-    initScene();
-    initGui();
-    initStats();
 
     // Resize detection
     window.addEventListener('resize', updateAspectRatio);
@@ -243,6 +237,16 @@ function init()
     uiHighscore = document.getElementById("uiHighscore");
     uiFuel = document.getElementById("uiFuel");
     uiControls = document.getElementById("uiControls");
+    uiRotateL = document.getElementById("uiRotateL");
+    uiRotateR = document.getElementById("uiRotateR");
+    uiThrust = document.getElementById("uiThrust");
+    
+    initCameras();
+    initInput();
+    initPhysics();
+    initScene();
+    initGui();
+    initStats();
 }
 
 function update()
@@ -508,6 +512,26 @@ function initInput()
             onThrustRelease();
         }
     })
+
+    // Buttons
+    uiRotateL.addEventListener('pointerdown', (event) => {
+        onLeftPress();
+    });
+    uiRotateL.addEventListener('pointerup', (event) => {
+        onLeftRelease();
+    });
+    uiRotateR.addEventListener('pointerdown', (event) => {
+        onRightPress();
+    });
+    uiRotateR.addEventListener('pointerup', (event) => {
+        onRightRelease();
+    });
+    uiThrust.addEventListener('pointerdown', (event) => {
+        onThrustPress();
+    });
+    uiThrust.addEventListener('pointerup', (event) => {
+        onThrustRelease();
+    });
 }
 
 function initPhysics() {
