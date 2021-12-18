@@ -1,0 +1,62 @@
+﻿<!doctype html>
+<!--
+    Seminario 2
+-->
+<html lang="es">
+    <head>
+        <meta charset="utf-8">
+        <title>Proyecto GPC</title>
+        <link rel="icon" href="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/microsoft/309/rocket_1f680.png">
+        <style>
+            body { margin: 0; }
+            canvas { width: 100vw; height: 100vh; display: block; }
+        </style>
+    </head>
+    <body>
+        
+        <!-- scripts de libreria -->
+        <script src="./lib/webgl-utils.js"></script>
+        <script src="./lib/webgl-debug.js"></script>
+        <script src="./lib/cuon-matrix.js"></script>
+        <script src="./lib/cuon-utils.js"></script>
+		<script src="./lib/three.min_r96.js"></script>
+
+        <script src="./lib/OrbitControls.js"></script>
+        <script src="./lib/dat.gui.min.js"></script>
+        <script src="./lib/tween_18.4.2.js"></script> <!-- 18.4.2 -->
+        <script src="./lib/stats.min.js"></script>
+        <script src="./lib/Coordinates.js"></script>
+        <script src="./lib/cannon_062.js"></script>
+        <script src="./lib/threex.domevents.js"></script>
+        <script src="./lib/threex.keyboardstate.js"></script>
+        
+		<script src="https://rawcdn.githack.com/mrdoob/three.js/r96/examples/js/loaders/GLTFLoader.js"></script>
+		
+        <!-- mis scripts -->
+        <script src="./js/game.js"></script>
+
+        <div id="container"></div>
+
+        <div id="stats"></div>
+
+        <div id="info" style="position:absolute;top:10px;width:100%;text-align:center;font-family: sans-serif;">
+            <p style="color:white">Jorge J González @ 2021</p>
+            <p id="uiControls" style="color:yellow">
+                Left/right arrows to apply angular thrust<br>
+                Space to propel the ship forward<br>
+                Mouse wheel to zoom<br>
+            </p>
+        </div>
+
+        <div style="position:relative;text-align:right;font-family: sans-serif;">
+            <h1 style="color:yellow;position:absolute; bottom:40px; right:20px;" id="uiScore">t+00:00:00</h1>
+            <h2 style="color:yellow;position:absolute; bottom:20px; right:20px;" id="uiHighscore">Best: t+00:00:00</h2>
+        </div>
+
+        <div style="position:relative;text-align:left;font-family: sans-serif;">
+            <h1 style="color:yellow;position:absolute; bottom:40px; left:20px;">Fuel:</h1>
+            <h2 style="color:green;position:absolute; bottom:20px; left:20px;" id="uiFuel">██░░</h2>
+        </div>
+		
+    </body>
+</html>
