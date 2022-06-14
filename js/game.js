@@ -652,18 +652,10 @@ function updateRocket()
     if (thrusting)
     {
         thrust(thrustIntensity);
-
-        rocketLight.intensity = rocketLightIntensity * 2.0;
-        rocketLight.color.setHex( 0xffff00 );
-
-        bottomCone.visible = true;
     }
     else
     {
-        rocketLight.intensity = rocketLightIntensity;
-        rocketLight.color.setHex( 0xffffff );
-
-        bottomCone.visible = false;
+        thrustEffect(false);
     }
 
     rocket.body.mass = rocketDryMass + fuel * rocketFuelMass;
@@ -1046,7 +1038,10 @@ function thrust(intensity)
         thrusting=true;
         rocket.body.applyLocalForce(new CANNON.Vec3(0,1,0).scale(intensity), new CANNON.Vec3(0,0,0));
         addFuel(-fuelPerPulse);
+
+        thrustEffect(true);
     }
+    else thrustEffect(false);
 }
 
 function rotate(intensity)
@@ -1067,6 +1062,24 @@ function brake()
     rocket.body.angularVelocity = new CANNON.Vec3(0,0,0);
     rocket.body.position.z = 0;
     rocket.body.velocity.z = 0;
+}
+
+function thrustEffect(enabled)
+{
+    if (enabled)
+    {
+        rocketLight.intensity = rocketLightIntensity * 2.0;
+        rocketLight.color.setHex( 0xffff00 );
+
+        bottomCone.visible = true;
+    }
+    else
+    {
+        rocketLight.intensity = 0.0;
+        rocketLight.color.setHex( 0xffffff );
+
+        bottomCone.visible = false;
+    }
 }
 
 function restart()
