@@ -1,8 +1,6 @@
 # WebGL Game
 
-Final project of the Computer Graphics subject of the IARFID Master's Degree (Universitat Politècnica de València).
-
-This project can be used as an educational game to understand basic physics principles.
+Educational game to understand basic physics principles, developed in WebGL. Initially developed as a deliverable for the Computer Graphics course of the MUIARFID master's degree (UPV).
 
 # [Try it!](https://jorgejgnz.github.io/MoonLander/)
 

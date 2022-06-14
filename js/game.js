@@ -7,6 +7,7 @@ var system, orbitCenter;
 var rocketModel;
 var sun, ambientLight;
 var centralObject;
+var atmosphereAsset;
 
 // Materials
 var defaultMat;
@@ -118,6 +119,7 @@ var rocketDryMass = 1.0;
 var rocketFuelMass = 1.0;
 var maxRocketSpeed = 2000;
 var bottomCone, leftCone, rightCone;
+var distToPlanet, distToSatellite;
 
 // Style
 var assets, rocketAsset, planetAsset, satelliteAsset, starAsset;
@@ -284,6 +286,22 @@ function update()
     {
         updateRocket();
         updateScore();
+        
+        // Atmos -> Camera
+        let lookDir = new THREE.Vector3(cameraControls.target.x,cameraControls.target.y,cameraControls.target.z);
+        lookDir.sub(camera.position);
+        lookDir.normalize();
+
+        if (cameraControls.enabled)
+        {
+            atmosphereAsset.lookAt(camera.position);
+            atmosphereAsset.rotateX(Math.PI / 2.0);
+        }
+        else
+        {
+            atmosphereAsset.rotation.y = atmosphereAsset.rotation.z = 0.0;
+            atmosphereAsset.rotation.x = Math.PI / 2.0; 
+        }
     }
 
     // GUI
@@ -532,6 +550,15 @@ function initInput()
     uiThrust.addEventListener('pointerup', (event) => {
         onThrustRelease();
     });
+
+    //General touch
+    window.addEventListener('touchstart', function onScreenTouch() {
+        window.USER_IS_TOUCHING = true;
+    });
+
+    window.addEventListener('touchend', function onScreenTouch() {
+        window.USER_IS_TOUCHING = false;
+    });
 }
 
 function initPhysics() {
@@ -591,6 +618,14 @@ function updateRocket()
     arrowHelper.setLength(length);
     arrowHelper.position.copy(rocket.visual.position);
 
+    // Mobile: action only when screen is being touched
+    if (window.USER_IS_TOUCHING != undefined &&  !window.USER_IS_TOUCHING)
+    {
+        wantsRotateL = false;
+        wantsRotateR = false;
+        thrusting = false;
+    }
+
     // Thrust
     if (wantsRotateL && !rotatedL)
     {
@@ -632,6 +667,21 @@ function updateRocket()
     }
 
     rocket.body.mass = rocketDryMass + fuel * rocketFuelMass;
+
+    // Simulate drag
+    let toPlanet = planet.body.position.vsub(rocket.body.position);
+    let toSatellite = satellite.body.position.vsub(rocket.body.position);
+    distToPlanet = toPlanet.length();
+    distToSatellite = toSatellite.length();
+
+    let atmosphereHeight = 200.0;
+    let maxAirFriction = 0.5;
+    if (distToPlanet < planetRadius + 20.0) rocket.body.linearDamping = 0.8;
+    else if (distToPlanet < planetRadius + atmosphereHeight){
+        let heightLerp = lerp(planetRadius, planetRadius + atmosphereHeight, distToPlanet);
+        rocket.body.linearDamping = (1.0 - heightLerp) * maxAirFriction;
+    }
+    else rocket.body.linearDamping = 0.0;
 }
 
 function updateGravity(physicalObject)
@@ -916,16 +966,16 @@ function setupPlanet(planetAsset)
     planetAsset.scale.x = planetAsset.scale.y = planetAsset.scale.z = planetRadius * 1.025;
 
     loadTexturedMaterial('models/rocket/','atmos-alpha.png',1,1,(mat) => {
-        let atmosphereAsset = planetAsset.getObjectByName("atmosphere");
+        atmosphereAsset = planetAsset.getObjectByName("atmosphere");
 
         atmosphereMat = new THREE.MeshBasicMaterial({color:0x87ceeb});
         atmosphereMat.map = mat.map;
         atmosphereMat.alphaMap = mat.map;
         atmosphereMat.transparent = true;
+        atmosphereMat.opacity = 0.5;
 
         atmosphereAsset.material = atmosphereMat;
     })
-
     planet.visual.add(planetAsset);
 }
 
@@ -1058,6 +1108,9 @@ function collision(e)
             finished = true;
             newHighscore(bestscore, score);
         }
+
+        stop(rocket.body);
+        rocket.body.velocity.copy(satelliteVel);
     }
 }
 

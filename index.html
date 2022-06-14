@@ -44,14 +44,17 @@
 
         <div id="stats"></div>
 
-        <div id="info" style="position:absolute;top:10px;width:100%;text-align:center;font-family: sans-serif;">
-            <p style="color:white">Jorge J González @ 2021</p>
-            <p id="uiControls" style="color:yellow">
-                Left/right arrows to apply angular thrust<br>
-                Space to propel the ship forward<br>
-                Mouse wheel to zoom<br>
-            </p>
+        <div class="show-large">
+            <div id="info" style="position:absolute;top:10px;width:100%;text-align:center;font-family:sans-serif;">
+                <p style="color:white">Jorge J González @ 2021</p>
+                <p id="uiControls" style="color:yellow">
+                    Left/right arrows to apply angular thrust<br>
+                    Space to propel the ship forward<br>
+                    Mouse wheel to zoom<br>
+                </p>
+            </div>
         </div>
+        
 
         <div style="position:relative;text-align:right;font-family: sans-serif;">
             <h1 style="color:yellow;position:absolute; bottom:50px; right:20px;" id="uiScore">t+00:00:00</h1>
@@ -63,17 +66,21 @@
             <h2 style="color:green;position:absolute; bottom:20px; left:20px;" id="uiFuel">██░░</h2>
         </div>
 
-        <div class="row control-group d-xxl-none opacity-50">
-            <div class="col">
-                <button type="button" id="uiRotateL" class="btn w-100 h-100" style="background-color:transparent; font-size:60px; touch-action: manipulation" onmousedown="onLeftPress();" onmouseup="onLeftRelease();">⬅️</button>
-            </div>
-            <div class="col">
-                <button type="button" id="uiThrust" class="btn btn-primary w-100 h-100" style="background-color:transparent; font-size:60px; touch-action: manipulation"  onmousedown="onThrustPress();" onmouseup="onThrustRelease();">⏫</button>
-            </div>
-            <div class="col">
-                <button type="button" id="uiRotateR" class="btn btn-primary w-100 h-100" style="background-color:transparent; font-size:60px; touch-action: manipulation"  onmousedown="onRightPress();" onmouseup="onRightRelease();">➡️</button>
+        <div class="show-mobile">
+            <div class="row control-group opacity-50">
+                <div class="col">
+                    <button type="button" id="uiRotateL" class="btn w-100 h-100" style="background-color:transparent; font-size:60px; touch-action: manipulation" onmousedown="onLeftPress();" onmouseup="onLeftRelease();">⬅️</button>
+                </div>
+                <div class="col">
+                    <button type="button" id="uiThrust" class="btn btn-primary w-100 h-100" style="background-color:transparent; font-size:60px; touch-action: manipulation"  onmousedown="onThrustPress();" onmouseup="onThrustRelease();">⏫</button>
+                </div>
+                <div class="col">
+                    <button type="button" id="uiRotateR" class="btn btn-primary w-100 h-100" style="background-color:transparent; font-size:60px; touch-action: manipulation"  onmousedown="onRightPress();" onmouseup="onRightRelease();">➡️</button>
+                </div>
             </div>
         </div>
+
+        
 		
     </body>
 </html>
