@@ -1,6 +1,6 @@
 # WebGL Game
 
-Educational game to understand basic physics principles, developed in WebGL. Initially developed as a deliverable for the Computer Graphics course of the MUIARFID master's degree (UPV).
+Educational game to understand basic physics principles, developed in WebGL. Initially developed as a deliverable for the course Computer Graphics, as part of the MUIARFID Master's Degree (UPV).
 
 # [Try it!](https://jorgejgnz.github.io/MoonLander/)
 
@@ -11,6 +11,8 @@ Educational game to understand basic physics principles, developed in WebGL. Ini
 
 Land on the moon smoothly in the shortest time possible before running out of fuel.
 
+Contact floating green spheres to get extra fuel.
+
 # Controls
 
 The ship can be controlled with:
@@ -18,4 +20,10 @@ The ship can be controlled with:
 * Space to propel the ship forward
 * Mouse wheel to zoom
 
-From the menu we can change the origin and rotation of the camera among other options.
+The rocket can be also controlled with buttons displayed on mobile devices.
+
+From the top-right menu we can change the origin and rotation of the camera among other options.
+
+# License
+
+[MIT](LICENSE)
