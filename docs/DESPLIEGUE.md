@@ -327,7 +327,7 @@ name: CD
 
 on:
   push:
-    branches: [main]
+    branches: [master]
 
 concurrency:
   group: deploy-production
@@ -346,33 +346,28 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          cache: 'npm'
-
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Build
-        run: npm run build
-
       - name: Configure AWS credentials (OIDC)
         uses: aws-actions/configure-aws-credentials@v4
         with:
           role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
           aws-region: eu-west-1
 
-      - name: Sync S3 — Assets con cache largo (JS, CSS, imágenes con hash)
+      - name: Sync S3 — Assets con cache largo (JS, CSS, imágenes, modelos)
         run: |
-          aws s3 sync dist/ s3://${{ secrets.S3_BUCKET_NAME }} --delete \
+          aws s3 sync . s3://${{ secrets.S3_BUCKET_NAME }} --delete \
+            --exclude ".git/*" \
+            --exclude ".github/*" \
+            --exclude "infra/*" \
+            --exclude "docs/*" \
+            --exclude "*.md" \
+            --exclude "LICENSE" \
             --exclude "*.html" \
             --cache-control "max-age=31536000, immutable"
 
       - name: Sync S3 — HTML sin cache
         run: |
-          aws s3 sync dist/ s3://${{ secrets.S3_BUCKET_NAME }} \
+          aws s3 sync . s3://${{ secrets.S3_BUCKET_NAME }} \
+            --exclude "*" \
             --include "*.html" \
             --cache-control "max-age=0, must-revalidate"
 
