@@ -142,7 +142,7 @@ resource "aws_iam_role" "github_actions_app_moonlander" {
       }
       Condition = {
         StringLike = {
-          "token.actions.githubusercontent.com:sub" = "repo:jorgejgnz/GamifiedEbookReader:*"
+          "token.actions.githubusercontent.com:sub" = "repo:jorgejgnz/MoonLander:*"
         }
         StringEquals = {
           "token.actions.githubusercontent.com:aud" = "sts.amazonaws.com"
