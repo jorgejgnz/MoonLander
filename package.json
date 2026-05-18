@@ -1,0 +1,10 @@
+{
+  "name": "moon-lander",
+  "version": "1.0.0",
+  "description": "Moon Lander - Three.js / Cannon.js game",
+  "scripts": {
+    "dev": "npx serve . --listen 3000",
+    "start": "npx serve . --listen 3000"
+  },
+  "license": "MIT"
+}

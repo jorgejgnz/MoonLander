@@ -37,7 +37,16 @@
         
 		<script src="https://rawcdn.githack.com/mrdoob/three.js/r96/examples/js/loaders/GLTFLoader.js"></script>
 		
-        <!-- Game -->
+        <!-- Game: load order matters — each file depends on the ones above -->
+        <script src="./js/config.js"></script>
+        <script src="./js/utils.js"></script>
+        <script src="./js/physics.js"></script>
+        <script src="./js/scene.js"></script>
+        <script src="./js/rocket.js"></script>
+        <script src="./js/camera.js"></script>
+        <script src="./js/input.js"></script>
+        <script src="./js/ui.js"></script>
+        <script src="./js/trajectory.js"></script>
         <script src="./js/game.js"></script>
 
         <div id="container"></div>
