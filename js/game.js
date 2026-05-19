@@ -73,12 +73,14 @@ function update() {
         updateTrajectory();
         updateScore();
 
-        if (cameraControls.enabled) {
-            atmosphereAsset.lookAt(camera.position);
-            atmosphereAsset.rotateX(Math.PI / 2.0);
-        } else {
-            atmosphereAsset.rotation.y = atmosphereAsset.rotation.z = 0.0;
-            atmosphereAsset.rotation.x = Math.PI / 2.0;
+        if (atmosphereAsset != null) {
+            if (cameraControls.enabled) {
+                atmosphereAsset.lookAt(camera.position);
+                atmosphereAsset.rotateX(Math.PI / 2.0);
+            } else {
+                atmosphereAsset.rotation.y = atmosphereAsset.rotation.z = 0.0;
+                atmosphereAsset.rotation.x = Math.PI / 2.0;
+            }
         }
     }
 

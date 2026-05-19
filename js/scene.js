@@ -77,8 +77,10 @@ function setupPlanet(planetAsset) {
     planetAsset.position = new THREE.Vector3(0, 0, 0);
     planetAsset.scale.x = planetAsset.scale.y = planetAsset.scale.z = planetRadius * 1.025;
 
+    atmosphereAsset = planetAsset.getObjectByName('atmosphere');
+
     loadTexturedMaterial('models/rocket/', 'atmos-alpha.png', 1, 1, function (mat) {
-        atmosphereAsset = planetAsset.getObjectByName('atmosphere');
+        if (atmosphereAsset == null) return;
 
         atmosphereMat = new THREE.MeshBasicMaterial({ color: 0x87ceeb });
         atmosphereMat.map = mat.map;
