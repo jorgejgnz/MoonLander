@@ -116,13 +116,13 @@ function updateTrajectory() {
             // Planet gravity
             var tpx = plx - px, tpy = ply - py, tpz = plz - pz;
             var dp  = Math.sqrt(tpx*tpx + tpy*tpy + tpz*tpz);
-            var aP  = (G * planetMass) / (dp * dp);
+            var aP  = (GRAVITY * planetMass) / (dp * dp);
             if (aP < gravityThreshold) aP = 0;
 
             // Satellite gravity
             var tsx = satX - px, tsy = satY - py, tsz = -pz;
             var ds  = Math.sqrt(tsx*tsx + tsy*tsy + tsz*tsz);
-            var aS  = (G * satelliteMass) / (ds * ds);
+            var aS  = (GRAVITY * satelliteMass) / (ds * ds);
             if (aS < gravityThreshold) aS = 0;
 
             var ax = (tpx/dp)*aP + (tsx/ds)*aS;

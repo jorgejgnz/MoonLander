@@ -105,8 +105,8 @@ function updateGravity(physicalObject) {
     var distToSatellite = toSatellite.length();
 
     // Gravitational acceleration magnitudes (m/s²)
-    var aPlanet    = (G * planetMass)    / Math.pow(distToPlanet,    2);
-    var aSatellite = (G * satelliteMass) / Math.pow(distToSatellite, 2);
+    var aPlanet    = (GRAVITY * planetMass)    / Math.pow(distToPlanet,    2);
+    var aSatellite = (GRAVITY * satelliteMass) / Math.pow(distToSatellite, 2);
     if (aPlanet    < gravityThreshold) aPlanet    = 0.0;
     if (aSatellite < gravityThreshold) aSatellite = 0.0;
 
@@ -170,7 +170,7 @@ function updateKinematicVelocity(physicalObject) {
 // ─── Body utilities ───────────────────────────────────────────────────────────
 
 function orbit(body, bigMass, distToBigCenter) {
-    var orbitSpeed = Math.sqrt((G * bigMass) / distToBigCenter);
+    var orbitSpeed = Math.sqrt((GRAVITY * bigMass) / distToBigCenter);
     body.velocity = new CANNON.Vec3(orbitSpeed, 0, 0);
 }
 

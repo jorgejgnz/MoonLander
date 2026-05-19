@@ -45,7 +45,7 @@ var keyboard;
 var controller;
 
 // ─── Physics ──────────────────────────────────────────────────────────────────
-const G = 6.674e-1;
+var GRAVITY = 6.674e-1;
 var world;
 var physMat;
 var velocityLerp, distanceLerp;
